@@ -85,14 +85,6 @@ export default function HomePage() {
     }
   };
 
-  // Updated handleDownload function to always use the fallback.
-  // This will open the URL in a new tab, allowing the user to manually download the video.
-  const handleDownload = () => {
-    if (result && result.url) {
-      window.open(result.url, '_blank');
-    }
-  };
-
   return (
     <div
       style={{
@@ -103,7 +95,7 @@ export default function HomePage() {
         padding: "2rem",
         fontFamily: "Arial, sans-serif",
         minHeight: "100vh",
-        textAlign: "center"
+        textAlign: "center",
       }}
     >
       <h1>Farcaster Video Downloader</h1>
@@ -115,7 +107,7 @@ export default function HomePage() {
           style={{
             display: "block",
             marginBottom: "0.5rem",
-            fontSize: "1.1rem"
+            fontSize: "1.1rem",
           }}
         >
           Farcaster URL:
@@ -128,7 +120,7 @@ export default function HomePage() {
               marginLeft: "0.5rem",
               padding: "0.5rem",
               width: "calc(100% - 1rem)",
-              fontSize: "1rem"
+              fontSize: "1rem",
             }}
             required
           />
@@ -139,7 +131,7 @@ export default function HomePage() {
           style={{
             padding: "0.5rem 1rem",
             fontSize: "1rem",
-            cursor: loading ? "not-allowed" : "pointer"
+            cursor: loading ? "not-allowed" : "pointer",
           }}
         >
           {loading ? "Processing..." : "Submit"}
@@ -162,16 +154,20 @@ export default function HomePage() {
       {result && !error && (
         <div style={{ marginTop: "1rem" }}>
           <p>{result.message}</p>
-          <button
-            onClick={handleDownload}
+          {/* Display a link that users can long-press on mobile to download */}
+          <a
+            href={result.url}
+            download={getFileNameFromUrl(url)}
             style={{
               padding: "0.5rem 1rem",
               fontSize: "1rem",
-              cursor: "pointer"
+              color: "#0070f3",
+              textDecoration: "underline",
+              display: "inline-block",
             }}
           >
             Download
-          </button>
+          </a>
         </div>
       )}
     </div>
