@@ -85,6 +85,12 @@ export default function HomePage() {
     }
   };
 
+  const handleDownload = async (videoUrl) => {
+    const filename = getFileNameFromUrl(videoUrl);
+    const downloadUrl = `/api/download?videoUrl=${encodeURIComponent(videoUrl)}&filename=${encodeURIComponent(filename)}`;
+    window.location.href = downloadUrl;
+  };
+
   return (
     <div
       style={{
@@ -153,14 +159,22 @@ export default function HomePage() {
 
       {result && !error && (
         <div style={{ marginTop: "1rem" }}>
-          <p>Hit download on the video to save it to your device.</p>
-          <video
-            src={result.url}
-            controls
-            playsInline
-            webkit-playsinline="true"
-            style={{ width: "100%", maxWidth: "500px" }}
-          />
+          <p>Click the button below to download your video:</p>
+          <button
+            onClick={() => handleDownload(result.url)}
+            style={{
+              padding: "0.5rem 1rem",
+              fontSize: "1rem",
+              backgroundColor: "#4CAF50",
+              color: "white",
+              border: "none",
+              borderRadius: "4px",
+              cursor: "pointer",
+              marginTop: "1rem"
+            }}
+          >
+            Download Video
+          </button>
         </div>
       )}
     </div>
