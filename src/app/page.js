@@ -153,21 +153,14 @@ export default function HomePage() {
 
       {result && !error && (
         <div style={{ marginTop: "1rem" }}>
-          <p>{result.message}</p>
-          {/* Display a link that users can long-press on mobile to download */}
-          <a
-            href={result.url}
-            download={getFileNameFromUrl(url)}
-            style={{
-              padding: "0.5rem 1rem",
-              fontSize: "1rem",
-              color: "#0070f3",
-              textDecoration: "underline",
-              display: "inline-block",
-            }}
-          >
-            Download
-          </a>
+          <p>Hit download on the video to save it to your device.</p>
+          <video
+            src={result.url}
+            controls
+            playsInline
+            webkit-playsinline="true"
+            style={{ width: "100%", maxWidth: "500px" }}
+          />
         </div>
       )}
     </div>
